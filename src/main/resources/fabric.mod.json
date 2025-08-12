@@ -1,28 +1,22 @@
 {
   "schemaVersion": 1,
-  "id": "cicada",
+  "id": "insecticide",
   "version": "${mod_version}",
-
-  "name": "CICADA",
-  "description": "Confusing, Interesting and Considerably Agnostic Development Aid",
+  "name": "Insecticide",
+  "description": "A mod that replaces CICADA to make it harmless",
   "authors": [
+    "Tigercrl",
     "enjarai"
   ],
   "contact": {
-    "homepage": "https://enjarai.dev/",
-    "sources": "https://github.com/enjarai/cicada-lib",
-    "issues": "https://github.com/enjarai/cicada-lib/issues"
+    "sources": "https://github.com/Tigercrl/insecticide-lib",
+    "issues": "https://github.com/Tigercrl/insecticide-lib/issues"
   },
-
   "license": "MIT",
-  "icon": "assets/cicada/icon.png",
-
+  "icon": "assets/insecticide/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "nl.enjarai.cicada.Cicada"
-    ],
-    "client": [
       "nl.enjarai.cicada.Cicada"
     ],
     "cicada": [
@@ -30,15 +24,16 @@
     ]
   },
   "mixins": [
-    "cicada.mixins.json"
+    "insecticide.mixins.json"
   ],
-
   "depends": {
     "java": ">=17",
     "minecraft": "${target_minecraft}",
     "fabricloader": ">=0.15.0"
   },
-
+  "provides": [
+    "cicada"
+  ],
   "custom": {
     "modmenu": {
       "badges": [

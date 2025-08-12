@@ -1,19 +1,13 @@
-# CICADA
+# Insecticide
 
-> **TO GET RID OF THE UGLY CAPE, UPDATE TO VERSION 0.13.1**
->
-> **This is a one-time update in order to avoid my servers getting accidentally DDoS'ed.**
-> **If you do not see CICADA in your mods folder, but still get the cape, adding version 0.13.1 will STILL fix the issue.**
->
-> **See [here](https://github.com/enjarai/cicada-lib/issues/12#issuecomment-3048238399) for more details.**
+A mod that replaces CICADA to make it harmless
 
-CICADA (proper backronym pending) is a library mod containing 
-general utilities and common abstractions I use in many of my mod projects.
+## What is CICADA
 
-Some of its features include:
+CICADA is a mod coded by enjarai which 99% of its code is **DIGITAL GARBAGE**
 
-- An api to facilitate inter-mod conversations in the game log.
-- Other logging tomfoolery.
-- A custom cloak renderer.
-- A GSON based self-managed mod config template class.
-- An abstract mixin plugin to facilitate compatibility mixins.
+It spams the console with messages like `[cicada] Hello, anyone there?`
+
+It modifies player capes and elytra with **ugly** textures
+
+**And insecticide replaces it with harmless code**

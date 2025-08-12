@@ -73,21 +73,6 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${property('deps.fabric_api')}"
 
-//	shade(api("io.github.spair:imgui-java-binding:${property('deps.imgui')}"))
-//	shade(api("io.github.spair:imgui-java-lwjgl3:${property('deps.imgui')}") {
-//		exclude group: "org.lwjgl"
-//	})
-////	shade(api("io.github.spair:imgui-java-natives-windows:${property('deps.imgui')}"))
-//	shade(api("io.github.spair:imgui-java-natives-linux:${property('deps.imgui')}"))
-////	shade(api("io.github.spair:imgui-java-natives-macos:${property('deps.imgui')}"))
-
-//	shade(api(rootProject.files('deps/imgui-java-binding-1.86.11-10-g0dbf36c.jar')))
-//	shade(api(rootProject.files('deps/imgui-java-lwjgl3-1.86.11-10-g0dbf36c.jar')))
-//	shade(api(rootProject.files('deps/imgui-java-natives-linux-1.86.11-10-g0dbf36c.jar')))
-//	shade(api(rootProject.files('deps/imgui-java-natives-macos-1.86.11-10-g0dbf36c.jar')))
-//	shade(api(rootProject.files('deps/imgui-java-natives-windows-1.86.11-10-g0dbf36c.jar')))
-
-//	include(api("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${property('deps.jackson')}"))
 	include(api("org.yaml:snakeyaml:${property('deps.snakeyaml')}"))
 
 	testmodImplementation sourceSets.main.output
@@ -121,8 +106,6 @@ shadowJar {
 //	destinationDirectory = file("${buildDir}/tmp/allJar")
 //	// Only shade dependencies not provided by Minecraft/FAPI/FLoader
 //	configurations = [project.configurations.shade]
-//	relocate 'imgui', 'nl.enjarai.cicada.imgui'
-//	relocate 'io.imgui', 'nl.enjarai.cicada.io.imgui'
 //
 //	//Exclude META-INF entries of shaded deps
 //	exclude('META-INF/**')
@@ -149,31 +132,11 @@ jar {
 	from("LICENSE") {
 		rename { "${it}_${project.archivesBaseName}"}
 	}
+    from("LICENSE-CICADA") {
+        rename { "${it}_cicada"}
+    }
 }
 
-// configure the maven publication
-publishing {
-	repositories {
-		maven {
-			name = "enjaraiMaven"
-			url = "https://maven.enjarai.dev/releases"
-			credentials(PasswordCredentials)
-			authentication {
-				basic(BasicAuthentication)
-			}
-		}
-	}
-
-	publications {
-		mavenJava(MavenPublication) {
-			groupId = group
-			artifactId = archivesBaseName
-			version = version
-
-			from components.java
-		}
-	}
-}
 
 // Create a task to collect the completed jars in the root project's build/libs folder.
 def collectJars = tasks.register("collectJars", Copy) {copy ->
@@ -213,10 +176,10 @@ publishMods {
 	def min = property('mod.target_min')
 	def max = property('mod.target_max')
 
-	if (providers.gradleProperty('enjaraiModrinthToken').present) {
+	if (providers.gradleProperty('tigercrlModrinthToken').present) {
 		modrinth {
 			projectId = property('mod.modrinth')
-			accessToken = providers.gradleProperty('enjaraiModrinthToken').get()
+			accessToken = providers.gradleProperty('tigercrlModrinthToken').get()
 
 			if (min == max) {
 				minecraftVersions.add(min)
@@ -230,36 +193,6 @@ publishMods {
 			requires {
 				slug = "fabric-api"
 			}
-		}
-	}
-
-	if (providers.gradleProperty('enjaraiCurseforgeToken').present) {
-		curseforge {
-			projectId = property('mod.curseforge')
-			accessToken = providers.gradleProperty('enjaraiCurseforgeToken').get()
-
-			if (min == max) {
-				minecraftVersions.add(min)
-			} else {
-				minecraftVersionRange {
-					start = min
-					end = max
-				}
-			}
-
-			requires {
-				slug = "fabric-api"
-			}
-		}
-	}
-
-	if (providers.gradleProperty('enjaraiGithubToken').present) {
-		github {
-			repository = property('mod.github')
-			accessToken = providers.gradleProperty('enjaraiGithubToken').get()
-
-			commitish = "master" // property('git_branch')
-			tagName = project.version
 		}
 	}
 }
