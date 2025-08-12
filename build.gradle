@@ -195,6 +195,16 @@ publishMods {
 			}
 		}
 	}
+
+	if (providers.gradleProperty('tigercrlGithubToken').present) {
+		github {
+			repository = property('mod.github')
+			accessToken = providers.gradleProperty('tigercrlGithubToken').get()
+
+			commitish = "master" // property('git_branch')
+			tagName = project.version
+		}
+	}
 }
 
 tasks.register('publishAll') {
