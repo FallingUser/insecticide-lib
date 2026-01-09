@@ -2,7 +2,7 @@ import net.fabricmc.loom.task.RemapJarTask
 plugins {
 	id 'fabric-loom' version '1.11-SNAPSHOT'
 	id 'maven-publish'
-	id "me.modmuss50.mod-publish-plugin" version "0.4.4"
+	id "me.modmuss50.mod-publish-plugin" version "1.1.0"
 	id 'com.github.johnrengelman.shadow' version '7.0.0'
 }
 
@@ -252,12 +252,12 @@ publishMods {
 		}
 	}
 
-	if (providers.gradleProperty('enjaraiGithubToken').present) {
-		github {
-			repository = property('mod.github')
-			accessToken = providers.gradleProperty('enjaraiGithubToken').get()
-
-			commitish = "master" // property('git_branch')
+	if (providers.gradleProperty('enjaraiCodebergToken').present) {
+		forgejo {
+			accessToken = providers.gradleProperty('enjaraiCodebergToken').get()
+			host(new URI("https://codeberg.org"))
+			repository = property('mod.codeberg')
+			commitish = "master"
 			tagName = project.version
 		}
 	}
