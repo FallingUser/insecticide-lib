@@ -1,15 +1,13 @@
-import net.fabricmc.loom.task.RemapJarTask
 plugins {
-	id 'fabric-loom' version '1.11-SNAPSHOT'
+	id 'net.fabricmc.fabric-loom' version '1.15-SNAPSHOT'
 	id 'maven-publish'
 	id "me.modmuss50.mod-publish-plugin" version "1.1.0"
-	id 'com.github.johnrengelman.shadow' version '7.0.0'
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
-
-archivesBaseName = property('mod.name')
+//archivesBaseName = property('mod.name')
+base {
+	archivesName = property('mod.name')
+}
 version = "${property('mod.version')}+${property('mod.jarname_target')}"
 group = property('mod.maven_group')
 
@@ -18,10 +16,6 @@ sourceSets {
 		compileClasspath += main.compileClasspath
 		runtimeClasspath += main.runtimeClasspath
 	}
-}
-
-configurations {
-	shade
 }
 
 loom {
@@ -66,11 +60,10 @@ def mcVersion = hasProperty('deps.mc') ? property('deps.mc') : stonecutter.curre
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${mcVersion}"
-	mappings "net.fabricmc:yarn:${property('deps.yarn')}:v2"
-	modImplementation "net.fabricmc:fabric-loader:${property('deps.fabric_loader')}"
+	implementation "net.fabricmc:fabric-loader:${property('deps.fabric_loader')}"
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${property('deps.fabric_api')}"
+	implementation "net.fabricmc.fabric-api:fabric-api:${property('deps.fabric_api')}"
 
 //	shade(api("io.github.spair:imgui-java-binding:${property('deps.imgui')}"))
 //	shade(api("io.github.spair:imgui-java-lwjgl3:${property('deps.imgui')}") {
@@ -115,35 +108,6 @@ jar {
 	destinationDirectory = file("${buildDir}/tmp/thinJar")
 }
 
-shadowJar {
-//	// Store in temporary folder instead of outputting directly
-//	destinationDirectory = file("${buildDir}/tmp/allJar")
-//	// Only shade dependencies not provided by Minecraft/FAPI/FLoader
-//	configurations = [project.configurations.shade]
-//	relocate 'imgui', 'nl.enjarai.cicada.imgui'
-//	relocate 'io.imgui', 'nl.enjarai.cicada.io.imgui'
-//
-//	//Exclude META-INF entries of shaded deps
-//	exclude('META-INF/**')
-//	// include() upsets shadow, so use from() instead
-//	from('LICENSE.md', 'NOTICE.txt')
-//	from('licenses') {
-//		into('licenses')
-//	}
-	configurations = [project.configurations.shade]
-//	classifier 'shadow-dev'
-	dependencies {
-		exclude(dependency('org.lwjgl:lwjgl'))
-		exclude(dependency('org.lwjgl:lwjgl-glfw'))
-		exclude(dependency('org.lwjgl:lwjgl-opengl'))
-	}
-}
-
-remapJar {
-	dependsOn shadowJar
-	input = shadowJar.archivePath
-}
-
 jar {
 	from("LICENSE") {
 		rename { "${it}_${project.archivesBaseName}"}
@@ -166,7 +130,7 @@ publishing {
 	publications {
 		mavenJava(MavenPublication) {
 			groupId = group
-			artifactId = archivesBaseName
+			artifactId = base.archivesName
 			version = version
 
 			from components.java
@@ -202,7 +166,7 @@ if (stonecutter.current.isActive()) {
 }
 
 publishMods {
-	file = remapJar.archiveFile
+	file = jar.archiveFile
 	displayName = "${property('mod.version')} for ${property('mod.target_nice')}"
 	version = project.version
 	changelog = ""

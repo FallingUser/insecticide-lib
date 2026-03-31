@@ -1,7 +1,7 @@
 package nl.enjarai.cicada;
 
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
 import nl.enjarai.cicada.api.conversation.ConversationManager;
 import nl.enjarai.cicada.api.util.CicadaEntrypoint;
 import nl.enjarai.cicada.api.util.JsonSource;
@@ -51,6 +51,6 @@ public final class Cicada implements ModInitializer, CicadaEntrypoint {
 	}
 
 	public static Identifier id(String path) {
-		return Identifier.of(MOD_ID, path);
+		return Identifier.fromNamespaceAndPath(MOD_ID, path);
 	}
 }

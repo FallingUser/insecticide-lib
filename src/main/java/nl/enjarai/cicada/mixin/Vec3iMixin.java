@@ -1,6 +1,6 @@
 package nl.enjarai.cicada.mixin;
 
-import net.minecraft.util.math.Vec3i;
+import net.minecraft.core.Vec3i;
 import nl.enjarai.cicada.util.duck.ConvertibleVec3i;
 import org.joml.Vector3i;
 import org.joml.Vector3ic;
