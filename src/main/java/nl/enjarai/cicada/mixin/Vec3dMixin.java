@@ -1,7 +1,7 @@
 package nl.enjarai.cicada.mixin;
 
 import net.minecraft.world.phys.Vec3;
-import nl.enjarai.cicada.util.duck.ConvertibleVec3d;
+import nl.enjarai.cicada.util.ConvertibleVec3d;
 import org.joml.Vector3d;
 import org.joml.Vector3dc;
 import org.spongepowered.asm.mixin.Final;

@@ -18,9 +18,3 @@ stonecutter.registerChiseled tasks.register("chiseledPublishAll", stonecutter.ch
 
     ofTask "publishAll"
 }
-
-stonecutter.registerChiseled tasks.register("chiseledRunTestmodClient", stonecutter.chiseled) {
-    setGroup "project"
-
-    ofTask "runTestmodClient"
-}

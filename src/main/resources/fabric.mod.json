@@ -18,9 +18,6 @@
   "entrypoints": {
     "main": [
       "nl.enjarai.cicada.Cicada"
-    ],
-    "cicada": [
-      "nl.enjarai.cicada.Cicada"
     ]
   },
   "mixins": [
@@ -42,7 +39,7 @@
     },
     "loom:injected_interfaces": {
       "net/minecraft/world/phys/Vec3": [
-        "nl/enjarai/cicada/util/duck/ConvertibleVec3d"
+        "nl/enjarai/cicada/util/ConvertibleVec3d"
       ]
     }
   }

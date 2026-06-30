@@ -11,31 +11,6 @@ base {
 version = "${property('mod.version')}+${property('mod.jarname_target')}"
 group = property('mod.maven_group')
 
-sourceSets {
-	testmod {
-		compileClasspath += main.compileClasspath
-		runtimeClasspath += main.runtimeClasspath
-	}
-}
-
-loom {
-//	runConfigs.client.ideConfigGenerated = true
-//	runConfigs.server.ideConfigGenerated = true
-
-	runs {
-		testmodClient {
-			client()
-			name = "Testmod Client"
-			source sourceSets.testmod
-		}
-		testmodServer {
-			server()
-			name = "Testmod Server"
-			source sourceSets.testmod
-		}
-	}
-}
-
 repositories {
 	// Add repositories to retrieve artifacts from in here.
 	// You should only use this when depending on other mods because
@@ -64,10 +39,6 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	implementation "net.fabricmc.fabric-api:fabric-api:${property('deps.fabric_api')}"
-
-	include(api("org.yaml:snakeyaml:${property('deps.snakeyaml')}"))
-
-	testmodImplementation sourceSets.main.output
 }
 
 processResources {
@@ -115,7 +86,6 @@ assemble {
 }
 
 if (stonecutter.current.isActive()) {
-	loom.runConfigs.testmodClient.ideConfigGenerated = true
 	loom.runConfigs.client.ideConfigGenerated = true
 
 	rootProject.tasks.register('buildActive') {

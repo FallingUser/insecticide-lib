@@ -1,4 +1,4 @@
-package nl.enjarai.cicada.util.duck;
+package nl.enjarai.cicada.util;
 
 import net.minecraft.world.phys.Vec3;
 import org.apache.commons.lang3.NotImplementedException;
