@@ -1,6 +1,6 @@
 package nl.enjarai.cicada.mixin;
 
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.phys.Vec3;
 import nl.enjarai.cicada.util.duck.ConvertibleVec3d;
 import org.joml.Vector3d;
 import org.joml.Vector3dc;
@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Shadow;
 
 @SuppressWarnings("AddedMixinMembersNamePattern")
-@Mixin(value = Vec3d.class, priority = 500)
+@Mixin(value = Vec3.class, priority = 500)
 public class Vec3dMixin implements ConvertibleVec3d {
     @Shadow @Final @Mutable
     public double x;
@@ -25,10 +25,10 @@ public class Vec3dMixin implements ConvertibleVec3d {
     }
 
     @Override
-    public Vec3d fromVector3d(Vector3dc vector) {
+    public Vec3 fromVector3d(Vector3dc vector) {
         x = vector.x();
         y = vector.y();
         z = vector.z();
-        return (Vec3d) (Object) this;
+        return (Vec3) (Object) this;
     }
 }

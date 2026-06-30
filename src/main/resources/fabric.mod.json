@@ -41,7 +41,7 @@
       ]
     },
     "loom:injected_interfaces": {
-      "net/minecraft/class_243": [
+      "net/minecraft/world/phys/Vec3": [
         "nl/enjarai/cicada/util/duck/ConvertibleVec3d"
       ]
     }

@@ -11,8 +11,5 @@
     "defaultRequire": 0
   },
   "client": [
-    "EntityRenderDispatcherMixin",
-    "EntityRendererMixin",
-    "EntityRenderStateMixin"
   ]
 }

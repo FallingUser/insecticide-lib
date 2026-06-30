@@ -1,6 +1,6 @@
 package nl.enjarai.cicada.util.duck;
 
-import net.minecraft.util.math.Vec3i;
+import net.minecraft.core.Vec3i;
 import org.apache.commons.lang3.NotImplementedException;
 import org.joml.Vector3i;
 import org.joml.Vector3ic;
